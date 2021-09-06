@@ -41,6 +41,9 @@ if ($level == 1) :
                     <?php } ?>
                 </tr>
                 <tr>
+                    <th>Normalisasi Matrik Nilai</th>
+                </tr>
+                <tr>
                     <?php foreach ($tanaman as $tn2) {
                         $hitung_matrik = '';
                         $hitung_matrik1 = '';
@@ -111,8 +114,10 @@ foreach ($tanaman as $tn2) {
             <tbody>
                 <?php 
                 $i=1;
+                $columns = array_column($results, 'nilai');
+                array_multisort($columns, SORT_DESC, $results);
                 foreach ($results as $value) {
-                    $max = max($results);
+                    // $max = max($results);
                 ?>
                     <tr>
                         <td class="text-center"><?= $i ?></td>
@@ -120,10 +125,10 @@ foreach ($tanaman as $tn2) {
                         <td class="text-center"><?= $value['nilai'] ?></td>
                     </tr>
                 <?php 
-                $keys = array_search($max, $results);    
-                unset($results[$keys]);
-                if(sizeof($results) >0)
-                if(!in_array($max,$results))
+                // $keys = array_search($max, $results);    
+                // unset($results[$keys]);
+                // if(sizeof($results) >0)
+                // if(!in_array($max,$results))
                     $i++;
             }?>
             </tbody>

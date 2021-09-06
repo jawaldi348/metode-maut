@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
     if ($username == '' || $password == '') {
         $error = 'Username dan password tidak boleh kosong';
     } else {
-        $sql = "select * from user where username='$username' AND password='$password'";
+        $sql = "select * from user where BINARY username='$username' AND BINARY password='$password'";
         $result = mysqli_query($link, $sql);
         $row = mysqli_fetch_assoc($result);
         if ($row == null) {

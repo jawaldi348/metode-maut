@@ -48,7 +48,7 @@ if (isset($_POST['tambah'])) {
                     </div>
                     <div class="form-group">
                         <label>Pilih Kriteria</label>
-                        <select name="kriteria" id="kriteria" class="form-control">
+                        <select name="kriteria" id="kriteria" class="form-control idkriteria">
                             <option value="">--- Pilih ---</option>
                             <?php $kriteria = mysqli_query($link, "SELECT * FROM kriteria");
                             while ($k = mysqli_fetch_array($kriteria)) { ?>
@@ -56,10 +56,7 @@ if (isset($_POST['tambah'])) {
                             <?php } ?>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Nilai</label>
-                        <input type="text" name="nilai" id="nilai" class="form-control">
-                    </div>
+                    <div id="nilai_kriteria"></div>
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-success" name="tambah"><i class="icon-floppy-disk"></i> Simpan</button>
@@ -69,3 +66,18 @@ if (isset($_POST['tambah'])) {
         </div>
     </div>
 </div>
+<script>
+    $(document).on('change', '.idkriteria', function(e) {
+        var idkriteria = $(".idkriteria").val();
+        $.ajax({
+            url: 'penilaian/nilai_kriteria.php',
+            method: "GET",
+            data: {
+                idkriteria: idkriteria
+            },
+            success: function(resp) {
+                $("#nilai_kriteria").html(resp);
+            }
+        });
+    });
+</script>

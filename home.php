@@ -103,7 +103,6 @@ $level = $session['level'];
                                         <img src="assets/dist/img/avatar5.png" class="img-circle" alt="User Image">
                                         <p>
                                             <?= $_SESSION['user_data']['nama'] ?> - <?= $_SESSION['user_data']['level'] == 1 ? 'Admin' : 'Kepala Dinas' ?>
-                                            <small>Member since Nov. 2012</small>
                                         </p>
                                     </li>
                                     <li class="user-footer">
