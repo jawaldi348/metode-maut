@@ -1,6 +1,6 @@
 <?php
 $kode = $_GET['kode'];
-$sql = "SELECT kode_nilai,nama_tanaman,nama_kriteria,nilai_tanaman FROM tanaman JOIN nilai_tanaman ON tanaman.kode_tanaman=nilai_tanaman.kode_tanaman
+$sql = "SELECT kode_nilai,nama_tanaman,kriteria.kode_kriteria AS idkriteria,nama_kriteria,nilai_tanaman FROM tanaman JOIN nilai_tanaman ON tanaman.kode_tanaman=nilai_tanaman.kode_tanaman
 JOIN kriteria ON kriteria.kode_kriteria=nilai_tanaman.kode_kriteria WHERE kode_nilai='$kode'";
 $result = mysqli_query($link, $sql);
 $data = mysqli_fetch_assoc($result);
@@ -49,8 +49,32 @@ if (isset($_POST['edit'])) {
                         <input type="text" class="form-control" value="<?= $data['nama_kriteria'] ?>" disabled>
                     </div>
                     <div class="form-group">
-                        <label>Nilai</label>
-                        <input type="text" name="nilai" id="nilai" class="form-control" value="<?= $data['nilai_tanaman'] ?>">
+                        <label>Nilai Kriteria</label><br>
+                        <?php if($data['idkriteria'] =='K-001'){?>
+                            <input type="radio" name="nilai" id="nilai" value="1" <?= $data['nilai_tanaman']=='1' ? 'checked' : '' ?>> Kurang Sesuai<br>
+                            <input type="radio" name="nilai" id="nilai" value="2" <?= $data['nilai_tanaman']=='2' ? 'checked' : '' ?>> Cukup Sesuai<br>
+                            <input type="radio" name="nilai" id="nilai" value="3" <?= $data['nilai_tanaman']=='3' ? 'checked' : '' ?>> Sangat Baik<br>
+                        <?php } else if($data['idkriteria'] =='K-002'){?>
+                            <input type="radio" name="nilai" id="nilai" value="1" <?= $data['nilai_tanaman']=='1' ? 'checked' : '' ?>> 26&deg; - 30&deg; C<br>
+                            <input type="radio" name="nilai" id="nilai" value="2" <?= $data['nilai_tanaman']=='2' ? 'checked' : '' ?>> 21&deg; - 25&deg; C<br>
+                            <input type="radio" name="nilai" id="nilai" value="3" <?= $data['nilai_tanaman']=='3' ? 'checked' : '' ?>> 15&deg; - 20&deg; C<br>
+                        <?php } else if($data['idkriteria'] =='K-003'){?>
+                            <input type="radio" name="nilai" id="nilai" value="1" <?= $data['nilai_tanaman']=='1' ? 'checked' : '' ?>> 301 mm - 400 mm<br>
+                            <input type="radio" name="nilai" id="nilai" value="2" <?= $data['nilai_tanaman']=='2' ? 'checked' : '' ?>> 201 mm - 300 mm<br>
+                            <input type="radio" name="nilai" id="nilai" value="3" <?= $data['nilai_tanaman']=='3' ? 'checked' : '' ?>> 151 mm - 200 mm<br>
+                        <?php } else if($data['idkriteria'] =='K-004'){?>
+                            <input type="radio" name="nilai" id="nilai" value="1" <?= $data['nilai_tanaman']=='1' ? 'checked' : '' ?>> < 60%<br>
+                            <input type="radio" name="nilai" id="nilai" value="2" <?= $data['nilai_tanaman']=='2' ? 'checked' : '' ?>> 60% - 80%<br>
+                            <input type="radio" name="nilai" id="nilai" value="3" <?= $data['nilai_tanaman']=='3' ? 'checked' : '' ?>> > 80%<br>
+                        <?php } else if($data['idkriteria'] =='K-005'){?>
+                            <input type="radio" name="nilai" id="nilai" value="1" <?= $data['nilai_tanaman']=='1' ? 'checked' : '' ?>> Kurang Lancar<br>
+                            <input type="radio" name="nilai" id="nilai" value="2" <?= $data['nilai_tanaman']=='2' ? 'checked' : '' ?>> Cukup<br>
+                            <input type="radio" name="nilai" id="nilai" value="3" <?= $data['nilai_tanaman']=='3' ? 'checked' : '' ?>> Lancar<br>
+                        <?php } else if($data['idkriteria'] =='K-006'){?>
+                            <input type="radio" name="nilai" id="nilai" value="1" <?= $data['nilai_tanaman']=='1' ? 'checked' : '' ?>> Rendah<br>
+                            <input type="radio" name="nilai" id="nilai" value="2" <?= $data['nilai_tanaman']=='2' ? 'checked' : '' ?>> Menengah<br>
+                            <input type="radio" name="nilai" id="nilai" value="3" <?= $data['nilai_tanaman']=='3' ? 'checked' : '' ?>> Tinggi<br>
+                        <?php }?>
                     </div>
                 </div>
                 <div class="box-footer">
